@@ -19,8 +19,8 @@
 <body>
 
 <?php
-    require('header.php');
-    require('navbar.php');
+    require('includes/header.php');
+    require('includes/navbar.php');
 
     // next comes content
 ?>
