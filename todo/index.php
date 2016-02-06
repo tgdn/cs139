@@ -7,7 +7,7 @@
     require_once('controllers/Page.php');
 
     require('includes/doctype.php');
-    <head>
+    echo '<head>';
     require('includes/meta.php');
     require('includes/static.php');
 
