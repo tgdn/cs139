@@ -1,10 +1,8 @@
 <?php
-    session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
 
-    require_once('controllers/User.php');
-    require_once('controllers/Page.php');
+    $page_controller = 'controllers/' . ucfirst(basename(__FILE__, '.php')) . 'Page.php';
+    $page_controller_class = ucfirst(basename(__FILE__, '.php')) . 'Page';
+    require_once('application/core/Main.php');
 
     require('includes/doctype.php');
     echo '<head>';
@@ -23,6 +21,8 @@
     require('includes/navbar.php');
 
     // next comes content
+
+    echo $user->is_authenticated() ? 'true' : 'false';
 ?>
 
     <div class="container">
@@ -48,7 +48,7 @@
                         <input autocomplete="off" class="form-control" id="id_username" name="username" maxlength="50" value="" placeholder="Username or email" type="text">
                     </div>
                     <div class="form-group form-group-lg">
-                        <label for="id_passsword" class="control-label">Password</label>
+                        <label for="id_password" class="control-label">Password</label>
                         <input autocomplete="off" class="form-control" id="id_password" name="password" placeholder="Password" type="password">
                     </div>
 
