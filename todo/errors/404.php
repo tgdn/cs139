@@ -17,7 +17,7 @@
 
 <?php
     require('../includes/header.php');
-    require('../includes/navbar.php');
+    //require('../includes/navbar.php');
 
     // next comes content
 ?>
@@ -25,10 +25,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h2 class="text-left">
+                <h2 class="text-center">
                     This page does not exist
                 </h2>
-                <hr>
 
             </div>
         </div>

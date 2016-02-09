@@ -10,8 +10,6 @@ class BaseUser {
     private $created_at = null;
     private $last_login = null;
 
-    protected $authenticated = false;
-
     public function __get($name) {
         return $this->$name;
     }
@@ -46,14 +44,6 @@ class BaseUser {
         return $password;
     }
 
-    public function username() {
-
-    }
-
-    public function full_name() {
-
-    }
-
 }
 
 
@@ -67,7 +57,7 @@ class User extends BaseUser {
         }
         $password = $user->hash_password($raw_password);
 
-        $sql = 'select id from user where username=:username and password=:password';
+        $sql = 'select id from user where username=:username and password=:password limit 1';
         $st = $database->prepare($sql);
         $st->bindValue(':username', $username, SQLITE3_TEXT);
         $st->bindValue(':password', $password, SQLITE3_TEXT);
@@ -79,6 +69,8 @@ class User extends BaseUser {
             $uid = $result['id'];
             $user->loadFromID($uid);
             $_SESSION['uid'] = $uid;
+
+            return true;
         }
 
         return false;
@@ -90,6 +82,11 @@ class User extends BaseUser {
         if ($user->is_authenticated()) {
             return false;
         }
+
+        // do db stuff here
+
+        // finally login user
+        self::login($username, $password);
 
         return false;
     }

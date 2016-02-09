@@ -1,20 +1,32 @@
 <?php
-spl_autoload_register(function ($classname) {
-    $req_file = 'application/controllers/' . $classname . '.php';
 
-    if (!file_exists($req_file)) {
-        $req_file = 'application/models/' . $classname . '.php';
+class Utils {
 
-        if (!file_exists($req_file)) {
-            $req_file = 'application/core/' . $classname . '.php';
-            
-            if (!file_exists($req_file)) {
-                throw new Exception('Could not load ' . $classname);
-            }
+    public static function login_required() {
+        global $user, $config;
+        if (!$user->is_authenticated()) {
+            // redirect
+            header('Location: ' . $config['LOGIN_URL']);
         }
     }
 
-    require_once($req_file);
-});
+    public static function anonymous_required() {
+        global $user, $config;
+        if (!$user->is_anonymous()) {
+            header('Location: ' . $config['LOGIN_REDIRECT_URL']);
+        }
+    }
+
+    public static function url($key) {
+        global $routes;
+
+        if (array_key_exists($key, $routes)) {
+            return $routes[$key];
+        } else {
+            return '';
+        }
+    }
+
+}
 
 ?>

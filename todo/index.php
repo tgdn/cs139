@@ -1,18 +1,14 @@
 <?php
-
-    $page_controller = 'controllers/' . ucfirst(basename(__FILE__, '.php')) . 'Page.php';
     $page_controller_class = ucfirst(basename(__FILE__, '.php')) . 'Page';
-    require_once('application/core/Main.php');
-
-    require('includes/doctype.php');
-    echo '<head>';
-    require('includes/meta.php');
-    require('includes/static.php');
-
-    // add extra scripts below
+    require_once 'application/core/Main.php';
 ?>
 
-    <title>TODO</title>
+<?php require('includes/doctype.php'); ?>
+<?php require('includes/meta.php'); ?>
+<?php require('includes/static.php'); ?>
+<?php /* add extra scripts below */ ?>
+
+<title>TODO</title>
 </head>
 <body>
 
@@ -21,8 +17,6 @@
     require('includes/navbar.php');
 
     // next comes content
-
-    echo $user->is_authenticated() ? 'true' : 'false';
 ?>
 
     <div class="container">
@@ -33,7 +27,7 @@
                 </h3>
                 <hr>
                 <p class="lead text-justify">
-                    <a href="register.html">Register now</a>, and never forget your tasks.
+                    <a href="<?php echo Utils::url('register'); ?>">Register now</a>, and never forget your tasks.
                 </p>
                 <p class="lead text-justify">
                     Already have an account? Log In below.
@@ -42,7 +36,11 @@
         </div>
         <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
-                <form action="lists.html" method="post">
+                <form action="" method="post" name="login-form">
+                    <!-- <?php echo $csrf_token_input; ?> -->
+                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                    <?php echo var_dump($_SESSION) ?>
+
                     <div class="form-group form-group-lg">
                         <label for="id_username" class="control-label">Email</label>
                         <input autocomplete="off" class="form-control" id="id_username" name="username" maxlength="50" value="" placeholder="Username or email" type="text">

@@ -16,7 +16,7 @@ EOD;
         $st->bindValue(':id', $uid, SQLITE3_INTEGER);
         $st = $st->execute();
 
-        return $st->fetchArray();
+        return $st->fetchArray(SQLITE3_ASSOC);
     }
 
     public static function update_login_date() {
