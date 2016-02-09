@@ -23,9 +23,8 @@ spl_autoload_register(function ($classname) {
 $database = new Database();
 $routes = require_once 'application/core/routes.php';
 
+require_once 'application/core/nocsrf.php';
 require_once 'application/core/utils.php';
-
-
 
 
 $user = null;
