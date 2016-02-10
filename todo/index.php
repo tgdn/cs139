@@ -39,7 +39,6 @@
                 <form action="" method="post" name="login-form">
                     <!-- <?php echo $csrf_token_input; ?> -->
                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
-                    <?php echo var_dump($_SESSION) ?>
 
                     <div class="form-group form-group-lg">
                         <label for="id_username" class="control-label">Email</label>

@@ -9,6 +9,10 @@ class IndexPage extends Page {
         Utils::anonymous_required();
     }
 
+    protected function get() {
+        NoCSRF::generate('csrf_token');
+    }
+
     protected function post() {
         $this->form['errors'] = array();
 

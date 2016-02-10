@@ -30,7 +30,8 @@ require_once 'application/core/utils.php';
 $user = null;
 $page = new $page_controller_class();
 
-$csrf_token = NoCSRF::generate('csrf_token');
-$csrf_token_input = '<input type="hidden" name="csrf_token" value="'. $csrf_token .'">';
+if (array_key_exists('csrf_csrf_token', $_SESSION)) {
+    $csrf_token_input = '<input type="hidden" name="csrf_token" value="'. $_SESSION['csrf_csrf_token'] .'">';
+}
 
 ?>

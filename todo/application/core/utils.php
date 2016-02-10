@@ -27,6 +27,10 @@ class Utils {
         }
     }
 
+    public static function escape($str) {
+        return htmlspecialchars(strip_tags($str));
+    }
+
 }
 
 ?>

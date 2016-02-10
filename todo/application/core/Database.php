@@ -11,6 +11,10 @@ class Database {
 		$this->database->close();
 	}
 
+	function get_db() {
+		return $this->database;
+	}
+
 	function exec($query) {
 		$this->database->exec($query);
 	}
