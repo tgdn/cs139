@@ -8,6 +8,8 @@ define('BASE_DIR', substr(PROJECT_DIR, strlen($_SERVER["DOCUMENT_ROOT"])));
 
 return array(
 
+    'SESSION_NAME' => 'todo_sess',
+
     'DB_FILE' => 'db/todo.db',
     'DB_CHARSET' => 'utf8',
 

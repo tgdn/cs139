@@ -1,9 +1,11 @@
 <?php
 
-session_start();
-
 // get main config
 $config = require_once 'application/core/config.php';
+
+session_name($config['SESSION_NAME']);
+if (session_status() == PHP_SESSION_NONE)
+    session_start();
 
 /* autoload classes */
 spl_autoload_register(function ($classname) {
