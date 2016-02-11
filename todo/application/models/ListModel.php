@@ -6,7 +6,7 @@ class ListModel {
         global $database;
 
         $sql = 'select * from list
-        where list.id=:list_id limit 1';
+        where list.id = :list_id limit 1';
 
         $st = $database->prepare($sql);
         $st->bindValue(':list_id', $list_id, SQLITE3_INTEGER);
@@ -21,8 +21,8 @@ class ListModel {
         list.id, list.name, list.created_at, list.modified_at
         from list
         inner join user_list
-            on list.id=user_list.list_id
-        where user_list.user_id=:user_id';
+            on list.id = user_list.list_id
+        where user_list.user_id = :user_id';
 
         $st = $database->prepare($sql);
         $st->bindValue(':user_id', $uid, SQLITE3_INTEGER);
@@ -38,8 +38,8 @@ class ListModel {
         user.id, user.username, user.full_name, user.email
         from user
         inner join user_list
-            on user.id=user_list.user_id
-        where user_list.list_id=:list_id';
+            on user.id = user_list.user_id
+        where user_list.list_id = :list_id';
 
         $st = $database->prepare($sql);
         $st->bindValue(':list_id', $list_id, SQLITE3_INTEGER);
