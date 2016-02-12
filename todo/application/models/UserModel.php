@@ -30,6 +30,47 @@ EOD;
         return $st->execute();
     }
 
+    public static function get_by_username($username) {
+        global $database;
+
+        $sql = 'select
+        id, username, email, full_name, created_at, last_login
+        from user where username = :username limit 1';
+        $st = $database->prepare($sql);
+        $st->bindValue(':username', $username, SQLITE3_TEXT);
+
+        return $st->execute();
+    }
+
+    public static function get_by_email($email) {
+        global $database;
+
+        $sql = 'select
+        id, username, email, full_name, created_at, last_login
+        from user where email = :email limit 1';
+        $st = $database->prepare($sql);
+        $st->bindValue(':email', $email, SQLITE3_TEXT);
+
+        return $st->execute();
+    }
+
+    public static function register($username, $email, $name, $password) {
+        global $database;
+
+        $sql = 'insert into user
+        (username, full_name, email, password, created_at, last_login)
+        values
+        (:username, :full_name, :email, :password, datetime("now"), datetime("now"))';
+        $st = $database->prepare($sql);
+
+        $st->bindValue(':username', $username, SQLITE3_TEXT);
+        $st->bindValue(':full_name', $name, SQLITE3_TEXT);
+        $st->bindValue(':email', $email, SQLITE3_TEXT);
+        $st->bindValue(':password', $password, SQLITE3_TEXT);
+
+        return $st->execute();
+    }
+
 }
 
 ?>

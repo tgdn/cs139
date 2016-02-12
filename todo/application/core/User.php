@@ -76,7 +76,7 @@ class User extends BaseUser {
         return false;
     }
 
-    public static function register($username, $email, $name, $password) {
+    public static function register($username, $email, $name, $raw_password) {
         global $user;
 
         if ($user->is_authenticated()) {
@@ -84,11 +84,13 @@ class User extends BaseUser {
         }
 
         // do db stuff here
+        $password = $user->hash_password($raw_password);
+        $r = UserModel::register($username, $email, $name, $password);
 
         // finally login user
-        self::login($username, $password);
+        self::login($username, $raw_password);
 
-        return false;
+        return true;
     }
 
 }

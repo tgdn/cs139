@@ -28,6 +28,10 @@ class List_viewPage extends Page {
         if ($redirect)
             header('Location: ' . $routes['lists']);
     }
+
+    protected function after_action() {
+        
+    }
 }
 
 ?>

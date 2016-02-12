@@ -2,8 +2,7 @@
 
 class IndexPage extends Page {
 
-    private $form = array();
-    private $fields = array('username','password');
+    protected $login_errors = array();
 
     protected function before_action() {
         Utils::anonymous_required();
@@ -14,33 +13,25 @@ class IndexPage extends Page {
     }
 
     protected function post() {
-        $this->form['errors'] = array();
-
-        foreach ($this->fields as $field) {
-            $this->form[$field] = array(
-                'value' => $_POST[$field],
-                'errors' => array()
-            );
-        }
-
-        $this->validate_form();
+        $this->validate_login();
     }
 
-    protected function validate_field($value) {
-        if (empty($value)) {
-            return false;
-        }
-        return true;
-    }
-
-    protected function validate_form() {
+    protected function validate_login() {
         global $user;
 
-        // try to log user in
-        User::login($form['username']['value'], $form['password']['value']);
+        $username = $_POST['username'];
+        $raw_pass = $_POST['password'];
 
-        if (!$user->is_authenticated()) {
-            array_push($this->form['errors'], "Incorrect username or password");
+        if (empty($username) || empty($raw_pass)) {
+            array_push($this->login_errors, 'All fields are required');
+            return;
+        }
+
+        // try to log user in
+        $r = User::login($username, $raw_pass);
+
+        if (!$r) {
+            array_push($this->login_errors, "Incorrect username or password");
         }
 
     }

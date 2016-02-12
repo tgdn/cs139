@@ -37,7 +37,7 @@ class Page {
             $user = User::fromID($_SESSION['uid']);
         }
 
-        User::login('thomas', 'thomas123');
+        //User::login('thomas', 'thomas123');
     }
 
     protected function handle_get() {
