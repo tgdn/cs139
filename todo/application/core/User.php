@@ -40,8 +40,12 @@ class BaseUser {
         return !$this->is_authenticated();
     }
 
+    protected function verify_password($raw, $hash) {
+        return password_verify($raw, $hash);
+    }
+
     protected function hash_password($password) {
-        return $password;
+        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
     }
 
 }
@@ -55,22 +59,27 @@ class User extends BaseUser {
         if ($user->is_authenticated()) {
             return true;
         }
+
+
         $password = $user->hash_password($raw_password);
 
-        $sql = 'select id from user where username=:username and password=:password limit 1';
+        $sql = 'select id, password from user where username = :username limit 1';
         $st = $database->prepare($sql);
         $st->bindValue(':username', $username, SQLITE3_TEXT);
-        $st->bindValue(':password', $password, SQLITE3_TEXT);
         $st = $st->execute();
         $result = $st->fetchArray(SQLITE3_ASSOC);
 
         if ($result && gettype($result) == 'array') {
-            // correct !
-            $uid = $result['id'];
-            $user->loadFromID($uid);
-            $_SESSION['uid'] = $uid;
+            // found a match
 
-            return true;
+            if ($user->verify_password($raw_password, $result['password'])) {
+                /* passwords match */
+                $uid = $result['id'];
+                $user->loadFromID($uid);
+                $_SESSION['uid'] = $uid;
+
+                return true;
+            }
         }
 
         return false;
