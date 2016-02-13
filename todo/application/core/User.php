@@ -22,7 +22,7 @@ class BaseUser {
 
     protected function loadFromID($uid) {
         $db_query = UserModel::get_user($uid);
-
+        UserModel::update_login_date($uid);
         $this->pk = $uid;
 
         // set instance variables here
@@ -59,7 +59,6 @@ class User extends BaseUser {
         if ($user->is_authenticated()) {
             return true;
         }
-
 
         $password = $user->hash_password($raw_password);
 

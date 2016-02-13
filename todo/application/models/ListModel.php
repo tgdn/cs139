@@ -52,7 +52,7 @@ class ListModel {
 
         /* insert list */
         $sql = 'insert into list (name, created_at, modified_at)
-        values (:name, date("now"), date("now"))';
+        values (:name, datetime("now"), datetime("now"))';
 
         $st = $database->prepare($sql);
         $st->bindValue(':name', $name, SQLITE3_TEXT);

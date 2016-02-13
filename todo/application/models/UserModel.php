@@ -22,7 +22,7 @@ EOD;
     public static function update_login_date() {
         global $database, $user;
 
-        $sql = "update user set last_login=date('now') where id=:id";
+        $sql = "update user set last_login=datetime('now') where id=:id";
         $st = $database->prepare($sql);
         $st->bindValue(':id', $user->pk, SQLITE3_INTEGER);
 
@@ -34,7 +34,7 @@ EOD;
         global $database;
 
         $sql = 'select
-        id, username, email, full_name, created_at, last_login
+        id, username, email, full_name, created_at, last_login, password
         from user where username = :username limit 1';
         $st = $database->prepare($sql);
         $st->bindValue(':username', $username, SQLITE3_TEXT);
@@ -46,7 +46,7 @@ EOD;
         global $database;
 
         $sql = 'select
-        id, username, email, full_name, created_at, last_login
+        id, username, email, full_name, created_at, last_login, password
         from user where email = :email limit 1';
         $st = $database->prepare($sql);
         $st->bindValue(':email', $email, SQLITE3_TEXT);
