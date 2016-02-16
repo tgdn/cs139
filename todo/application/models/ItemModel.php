@@ -36,12 +36,26 @@ class ItemModel {
         return $st->execute();
     }
 
-    public static function delete($item_id) {
+    public static function delete($item_id) {
         global $database;
 
         $sql = 'delete from list_item where id = :item_id';
         $st = $database->prepare($sql);
         $st->bindValue(':item_id', $item_id, SQLITE3_INTEGER);
+
+        return $st->execute();
+    }
+
+    public static function add($list_id, $content) {
+        global $database;
+
+        $sql = 'insert into list_item
+        (content, completed, list_id, created_at, modified_at)
+        values
+        (:content, 0, :list_id, datetime("now"), datetime("now"))';
+        $st = $database->prepare($sql);
+        $st->bindValue(':content', $content, SQLITE3_TEXT);
+        $st->bindValue('list_id', $list_id, SQLITE3_INTEGER);
 
         return $st->execute();
     }

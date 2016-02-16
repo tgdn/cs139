@@ -36,8 +36,6 @@ class Page {
         if (array_key_exists('uid', $_SESSION)) {
             $user = User::fromID($_SESSION['uid']);
         }
-
-        //User::login('thomas', 'thomas123');
     }
 
     protected function handle_get() {

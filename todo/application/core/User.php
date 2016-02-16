@@ -47,7 +47,6 @@ class BaseUser {
     protected function hash_password($password) {
         return password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
     }
-
 }
 
 
@@ -60,7 +59,7 @@ class User extends BaseUser {
             return true;
         }
 
-        $password = $user->hash_password($raw_password);
+        //$password = $user->hash_password($raw_password);
 
         $sql = 'select id, password from user where username = :username limit 1';
         $st = $database->prepare($sql);

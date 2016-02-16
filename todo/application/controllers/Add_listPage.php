@@ -11,7 +11,7 @@ class Add_listPage extends Page {
         $name = $_POST['name'];
 
         if (isset($name) && !empty($name)) {
-            $list_list = ListModel::add($user->pk, $_POST['name']);
+            ListModel::add($user->pk, $_POST['name']);
 
             header('Location: ' . $routes['lists']);
         }

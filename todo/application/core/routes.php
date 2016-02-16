@@ -12,7 +12,8 @@ return array(
     'lists' => BASE_DIR . '/lists.php',
     'list_view' => BASE_DIR . '/list_view.php',
     'list_delete' => BASE_DIR . '/list_delete.php',
-    'add_list' => BASE_DIR . '/add_list.php'
+    'add_list' => BASE_DIR . '/add_list.php',
+    'add_item' => BASE_DIR . '/add_item.php'
 
 );
 

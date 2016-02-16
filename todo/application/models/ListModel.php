@@ -14,6 +14,18 @@ class ListModel {
         return $st->execute();
     }
 
+    public static function get_from_id_and_user_id($list_id, $user_id) {
+        global $database;
+
+        $sql = 'select * from user_list
+        where user_id = :user_id and list_id = :list_id';
+        $st = $database->prepare($sql);
+        $st->bindValue(':user_id', $user_id, SQLITE3_INTEGER);
+        $st->bindValue(':list_id', $list_id, SQLITE3_INTEGER);
+
+        return $st->execute();
+    }
+
     public static function get_for_user_id($uid) {
         global $database;
 

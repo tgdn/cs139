@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="main-menu">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="lists.php">Your lists</a></li>
-                <li><a href="categories.html">Categories</a></li>
+                <!-- <li><a href="categories.html">Categories</a></li> -->
                 <li><a href="<?php echo $routes['logout']; ?>">Log out</a></li>
             </ul>
         </div>
