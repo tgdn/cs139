@@ -5,11 +5,9 @@ class UserModel {
     public static function get_user($uid) {
         global $database;
 
-        $sql = <<<'EOD'
-select
-id, username, full_name, email, created_at, last_login
-from user where id=:id
-EOD;
+        $sql = 'select
+            id, username, full_name, email, created_at, last_login
+            from user where id = :id';
 
         $st = $database->prepare($sql);
 
@@ -56,6 +54,8 @@ EOD;
 
     public static function register($username, $email, $name, $password) {
         global $database;
+
+        $database->query($sql);
 
         $sql = 'insert into user
         (username, full_name, email, password, created_at, last_login)
