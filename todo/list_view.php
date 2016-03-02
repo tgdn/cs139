@@ -41,10 +41,10 @@ $list = $page->list
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <ul class="list-container lead list-unstyled">
+            <ul class="list-container lead list-unstyled" id="todolist" data-id="<?php echo $list['id'] ?>">
                 <?php while ($item = $page->items->fetchArray(SQLITE3_ASSOC)) { ?>
-                <li>
-                    <input type="checkbox">
+                <li data-id="<?php echo $item['id'] ?>" <?php echo $item['completed'] == 1 ? 'class="completed"' : '' ?>>
+                    <input type="checkbox" <?php echo $item['completed'] == 1 ? 'checked' : '' ?>>
                     &nbsp;
                     <input type="text" value="<?php echo Utils::escape($item['content']) ?>">
                     &nbsp;
@@ -57,5 +57,6 @@ $list = $page->list
 </div>
 
 <?php require('includes/scripts.php'); ?>
+<script src="static/js/list_view.js" type="text/javascript"></script>
 </body>
 </html>

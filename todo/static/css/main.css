@@ -109,6 +109,10 @@ ul.list-container li {
     margin-bottom: 15px;
 }
 
+ul.list-container li.completed {
+    opacity: 0.4;
+}
+
 ul.list-container li input[type=text] {
     padding: 6px;
     width: 500px;

@@ -3,6 +3,8 @@
     require_once 'application/core/Main.php';
 ?>
 
+<?php if (!$page->is_json): ?>
+
 <?php require('includes/doctype.php'); ?>
 <?php require('includes/meta.php'); ?>
 <?php require('includes/static.php'); ?>
@@ -30,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
-                <form action="" method="post">
+                <form action="" method="post" id="create-form">
                     <div class="form-group form-group-lg">
                         <label for="id_content" class="control-label">Content</label>
                         <input autocomplete="off" class="form-control" id="id_content" name="content" maxlength="100" value="" placeholder="Content" type="text">
@@ -46,5 +48,7 @@
     </div>
 
 <?php require('includes/scripts.php'); ?>
+<script src="static/js/create-form.js" type="text/javascript"></script>
 </body>
 </html>
+<?php endif; ?>
